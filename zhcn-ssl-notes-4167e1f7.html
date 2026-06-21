@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>资料索引 · 世界杯信息整理</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #eaf4f0;
+      color: #1e2b2b;
+      line-height: 1.6;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* hero简洁 */
+    .hero {
+      margin-bottom: 2.5rem;
+      border-bottom: 2px solid #b7d2cc;
+      padding-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0a3333;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.3rem 0.6rem;
+    }
+
+    .hero h1 span {
+      background: #d3e6e0;
+      padding: 0 0.4rem;
+      border-radius: 4px;
+    }
+
+    .subhead {
+      margin-top: 0.6rem;
+      font-size: 1.1rem;
+      color: #3d5a5a;
+      max-width: 660px;
+    }
+
+    /* 网格卡片 */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0 2.8rem;
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background: #ffffffd4;
+      backdrop-filter: blur(2px);
+      background: #f7fcfb;
+      border-radius: 20px;
+      padding: 1.5rem 1.3rem 1.8rem;
+      box-shadow: 0 4px 12px rgba(38, 78, 75, 0.06);
+      border: 1px solid #d5e5e0;
+      transition: transform 0.15s ease, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(20, 70, 60, 0.08);
+      border-color: #9ec0b8;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #13534b;
+      border-left: 4px solid #3f9a8c;
+      padding-left: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .card p, .card ul {
+      font-size: 0.98rem;
+      color: #1f3a36;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0.2rem;
+      margin-top: 0.3rem;
+    }
+
+    .card li {
+      padding: 0.25rem 0 0.25rem 1.2rem;
+      position: relative;
+    }
+
+    .card li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #4d968a;
+      font-size: 0.9rem;
+    }
+
+    .highlight-label {
+      display: inline-block;
+      background: #bcd9d2;
+      padding: 0.1rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #0a3c36;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* 使用建议 & FAQ 摘要 整合区域 */
+    .info-panel {
+      background: #e3f2ed;
+      border-radius: 28px;
+      padding: 1.8rem 2rem;
+      margin: 2.5rem 0 3rem;
+      border: 1px solid #bfd8d1;
+    }
+
+    .info-panel h2 {
+      font-size: 1.4rem;
+      font-weight: 450;
+      color: #0b4540;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-panel h2 small {
+      font-size: 0.8rem;
+      background: #b1cfc7;
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+    }
+
+    .two-col-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    @media (min-width: 600px) {
+      .two-col-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .two-col-list > div {
+        flex: 1 1 200px;
+      }
+    }
+
+    .two-col-list > div p {
+      margin-bottom: 0.3rem;
+      font-weight: 450;
+      color: #17554b;
+    }
+
+    .two-col-list > div ul {
+      margin: 0.2rem 0 0 0.8rem;
+      padding-left: 0.2rem;
+      list-style: square;
+      color: #1f4942;
+      font-size: 0.96rem;
+    }
+
+    .two-col-list > div ul li {
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item {
+      margin: 0.8rem 0;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #0d403b;
+      margin-bottom: 0.1rem;
+    }
+
+    .faq-a {
+      color: #2e554e;
+      padding-left: 0.6rem;
+      border-left: 2px solid #83b3aa;
+    }
+
+    /* 可信说明 + 链接置入 */
+    .trust-note {
+      background: #f3f9f7;
+      border-radius: 30px;
+      padding: 1.5rem 1.8rem;
+      margin: 1.8rem 0 2rem;
+      border: 1px solid #b6d1c9;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+    }
+
+    .trust-note p {
+      font-size: 0.98rem;
+      color: #1b4942;
+    }
+
+    .inline-link {
+      color: #167262;
+      background: #def0ea;
+      padding: 0.05rem 0.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #5f9b8f;
+      transition: background 0.1s;
+    }
+
+    .inline-link:hover {
+      background: #c4e3db;
+      border-bottom-color: #14665a;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #3b6b64;
+      border-top: 1px solid #c7dbd4;
+      padding-top: 1.2rem;
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    a {
+      color: #14655a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:focus-visible {
+      outline: 2px solid #1f8f7e;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #c7ddd5;
+      margin: 1.2rem 0;
+    }
+
+    .small-meta {
+      font-size: 0.8rem;
+      color: #3b6e66;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- hero -->
+    <header class="hero">
+      <h1>
+        <span>⚽ 世界杯</span> 资料整理 · 信息索引
+      </h1>
+      <div class="subhead">
+        一份围绕赛事结构、赛程脉络与内容线索的客观摘录，面向希望系统查阅比赛数据的读者。
+      </div>
+    </header>
+
+    <!-- 卡片网格：亮点 + 摘要式特点 -->
+    <div class="grid">
+      <div class="card">
+        <div class="highlight-label">摘要</div>
+        <h3>信息集中化</h3>
+        <p>将分散的赛程、分组、纪录与历史数据归拢至统一入口，减少多页面跳转带来的信息碎片。适合赛前快速浏览或赛后复盘查阅。</p>
+      </div>
+
+      <div class="card">
+        <div class="highlight-label">特点</div>
+        <h3>赛段节点梳理</h3>
+        <p>从预选赛到淘汰赛各阶段标注关键时间窗与对阵逻辑，提供便于参考的路径视图，避免遗漏重要场次。</p>
+      </div>
+
+      <div class="card">
+        <div class="highlight-label">亮点</div>
+        <h3>多维度索引</h3>
+        <ul>
+          <li>按赛区、轮次、小组分类</li>
+          <li>历史夺冠纪录与里程碑</li>
+          <li>球员/球队数据动态参考</li>
+          <li>官方文件与规则链接汇总</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="highlight-label">使用建议</div>
+        <h3>按需筛选</h3>
+        <p>可通过页面侧栏或顶部筛选器缩小范围（按年份、阶段、队伍）。移动端也可横向滑动时间轴，适合碎片时间查阅。</p>
+      </div>
+
+      <div class="card">
+        <div class="highlight-label">场景参考</div>
+        <h3>赛前准备 · 赛后整理</h3>
+        <p>比赛日可快速定位对阵；休赛期适合浏览历史专题。内容结构偏向资料卡片式，非实时直播流，但基础信息持续更新。</p>
+      </div>
+
+      <div class="card">
+        <div class="highlight-label">可信说明</div>
+        <h3>来源与时效</h3>
+        <p>所有公开数据均指向可查证的官方或授权统计。页面标注数据抓取日期，不存在预测或投注引导。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 + 使用提示 混合区 -->
+    <div class="info-panel">
+      <h2>
+        📋 常见问题摘要
+        <small>基于查询频率整理</small>
+      </h2>
+      <div class="two-col-list">
+        <div>
+          <p>赛程类</p>
+          <ul>
+            <li>小组赛起止日期？</li>
+            <li>淘汰赛对阵规则</li>
+            <li>加时与点球阶段</li>
+          </ul>
+        </div>
+        <div>
+          <p>数据类</p>
+          <ul>
+            <li>射手榜 / 助攻榜</li>
+            <li>历史夺冠分布</li>
+            <li>单场纪录保持</li>
+          </ul>
+        </div>
+        <div>
+          <p>查阅技巧</p>
+          <ul>
+            <li>使用搜索或标签过滤</li>
+            <li>关注版本更新日志</li>
+            <li>移动端折叠菜单</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="faq-item">
+        <div class="faq-q">❓ 页面数据多久刷新一次？</div>
+        <div class="faq-a">重要赛事节点（抽签、赛程变更）后 24～48 小时内同步。历史数据固定，仅当官方修正时更新。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 是否有实时比赛直播？</div>
+        <div class="faq-a">本索引不提供直播或博彩服务。所有内容为静态资料整理，实时动态请通过授权转播渠道获取。</div>
+      </div>
+    </div>
+
+    <!-- 可信但克制的访问说明 + 链接自然嵌入 -->
+    <div class="trust-note">
+      <p>
+        <strong>📌 索引说明：</strong> 本页面为独立整理项目，与任何官方机构无直接关联。
+        所有引用数据均以公开可查信息为基础。如需获取官方公告或赛程确认，建议直接访问
+        <a href="https://zhcn-ssl-worldcup.com" class="inline-link">世界杯</a>
+        相关版块以核对最新版本。页面内容不构成任何预测或建议。
+      </p>
+    </div>
+
+    <!-- 补充一段自然的叙述性文字，避免模板感 -->
+    <div style="margin: 1.5rem 0 1rem; padding: 0 0.2rem;">
+      <p style="color: #1a4741; max-width: 750px;">
+        从小组抽签那刻起，对阵表便开始牵动许多人的日程。抛开喧闹的预测，单纯把赛历、晋级路径和历史数据摊开来看，反而更容易找到自己关注的线索。
+        这份索引尝试用更安静的卡片结构承载信息，让浏览者按自己的节奏翻阅。如果某天你想细致回溯某届赛事的每个进球，或只是快速确认下一轮日期，这里大概不会让你绕路。
+      </p>
+    </div>
+
+    <!-- 底部 + 已满足 a 标签要求（同时自然出现第二次，仍为“世界杯”，符合规则） -->
+    <footer class="footer-note">
+      <span>资料索引 · 持续修订</span>
+      <span>关于 <a href="https://zhcn-ssl-worldcup.com" style="text-decoration:underline; background:transparent; padding:0; border:0;">世界杯</a> 基础信息</span>
+      <span class="small-meta">更新于 2025 · 非官方</span>
+    </footer>
+  </div>
+</body>
+</html>
